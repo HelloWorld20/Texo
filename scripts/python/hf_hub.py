@@ -3,6 +3,8 @@ from pathlib import Path
 from huggingface_hub import HfApi, create_repo, snapshot_download
 from transformers import AutoTokenizer, VisionEncoderDecoderModel
 
+import sys
+sys.path.insert(0, '/Users/leon.w/workspace/python/Texo/src')
 from task import FormulaNetLit, PreTrainedTokenizerFast
 
 
@@ -62,3 +64,4 @@ if __name__ == '__main__':
         args.func(args)
     else:
         parser.print_help()
+

@@ -30,6 +30,7 @@ text_processor = TextProcessor(config={
 })
 
 for test_dataset_path in test_dataset_paths.iterdir():
+    print('test_dataset_path', test_dataset_path, test_dataset_path.is_dir())
     if test_dataset_path.is_dir():
         test_dataset_names.append(test_dataset_path.name)
         test_datasets.append(MERDatasetHF(
@@ -40,6 +41,7 @@ for test_dataset_path in test_dataset_paths.iterdir():
 
 test_loaders= []
 for test_dataset in test_datasets:
+    print('test_dataset', test_dataset)
     test_loaders.append(torch.utils.data.DataLoader(
                         dataset=test_dataset,
                         batch_size=1,
@@ -50,11 +52,13 @@ for test_dataset in test_datasets:
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 onnx_model = ORTModelForVision2Seq.from_pretrained('./model/onnx')
 onnx_model.to(device)
-
+print('prepare done')
 for idx, test_loader in enumerate(test_loaders):
+    print('in the loop')
     total_bleu = 0
     total_edit_distance = 0
     pbar = tqdm(test_loader, total=len(test_loader), desc=f"Test on {test_dataset_names[idx]}")
+    print(f"Test on {test_dataset_names[idx]}")
     for i, batch in enumerate(pbar):
         pixel_values = batch['pixel_values'].to(device)
         ref_str = text_processor.tokenizer.batch_decode(text_processor(batch['text']).input_ids, skip_special_tokens=True)

@@ -23,11 +23,4 @@ def export_onnx():
     )
 
 if __name__ == '__main__':
-    import debugpy
-    try:
-        debugpy.listen(('localhost', 9501))
-        print('Waiting for debugger attach')
-        debugpy.wait_for_client()
-    except Exception as e:
-        pass
     export_onnx()

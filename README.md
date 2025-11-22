@@ -1,5 +1,3 @@
-test
-
 <p align="center" style="margin-bottom: 0">
   <img src="./assets/svg/logo-text.svg#gh-light-mode-only" alt="Texo Logo" width="300"/>
   <img src="./assets/svg/logo-text-dark.svg#gh-dark-mode-only" alt="Texo Logo" width="300"/>
